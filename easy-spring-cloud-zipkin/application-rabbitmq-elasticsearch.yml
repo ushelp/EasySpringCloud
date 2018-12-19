@@ -1,0 +1,32 @@
+server: 
+  port: 9411
+
+zipkin: 
+  collector: 
+    rabbitmq: 
+      addresses: localhost
+      username: admin
+      password: 123
+      useSsl: false
+  storage:
+    type: elasticsearch
+    elasticsearch:
+      hosts: http://127.0.0.1:9200
+      max-requests: 64
+      timeout: 10000
+      index: zipkin
+      date-separator: '-'
+      index-shards: 5
+      index-replicas: 1
+      #username: 
+      #password: 
+# Disabling auto time http requests since it is added in Undertow HttpHandler in Zipkin autoconfigure
+# Prometheus module. In Zipkin we use different naming for the http requests duration
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+
+spring: 
+  profiles: 
+    active: shared

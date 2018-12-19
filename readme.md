@@ -26,7 +26,7 @@
 - Zuul 服务网关
 - Stream 消息驱动服务
 	- RabbitMQ 
-- Sleuth 和 Zipkin 分布式服务追踪技术(Distributed Systems Tracing System)
+- Sleuth 和 Zipkin 分布式服务追踪系统(Distributed Systems Tracing System)
 	- HTTP 收集器 + Mem 存储
 	- RabbitMQ 收集器 + ElasticSearch 存储
 
