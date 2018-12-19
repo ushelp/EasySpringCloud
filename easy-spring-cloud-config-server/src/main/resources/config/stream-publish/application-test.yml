@@ -1,0 +1,12 @@
+server:
+  port: 6001
+  
+spring:
+  application:
+    name: stream-receiver
+  # Spring Cloud Bus: RabbitMQ
+  rabbitmq:
+    host: localhost
+    password: 123
+    port: 5672
+    username: admin

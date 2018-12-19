@@ -1,0 +1,44 @@
+server:
+  port: 2000
+  
+spring:
+  application:
+    name: config-server
+  # SVN
+  profiles:
+    active: subversion
+  cloud:
+    config:
+      server:
+        # SVN Config
+        svn:
+          uri: svn://127.0.0.1/config
+          username: admin
+          password: 123
+          default-label: '' # default is "trunk"
+  # Security
+  security:
+    user:
+      name: admin
+      password: 123      
+  # Spring Cloud Bus: RabbitMQ
+  rabbitmq:
+    host: localhost
+    password: 123
+    port: 5672
+    username: admin
+      
+# Eureka
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123@localhost:8700/eureka
+#      defaultZone: http://admin:123@host1:8700/eureka/,http://admin:123@host2:8701/eureka/,http://admin:123@host3:8702/eureka/
+        
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      

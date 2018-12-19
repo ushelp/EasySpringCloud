@@ -1,0 +1,35 @@
+server:
+  port: 8700
+  
+spring:
+  application:
+    name: eureka-server 
+  # Security
+  security:
+    user:
+      name: admin
+      password: 123
+      
+# Eureka
+eureka:
+  instance:
+    hostname: localhost
+  # Standalone Mode
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  #  Cluster Mode
+#  client: 
+#    serviceUrl: 
+#      defaultZone: http://admin:123@localhost:8701/eureka/,http://admin:123@localhost:8702/eureka/
+  datacenter: cloud
+  environment: prod
+  # USED ONLY IN DEVELOPMENT MODE
+  # DevMode: Remove invalidate
+#  server: 
+#    enableSelfPreservation: false
+#    evictionIntervalTimerInMs: 4000
+
+    

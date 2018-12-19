@@ -1,0 +1,69 @@
+server:
+  port: 8900
+spring:
+  application:
+    name: users-consumer-feign
+  # RabbitMQ(Spring Cloud Bus, Zipkin)
+  rabbitmq:
+    host: localhost
+    password: 123
+    port: 5672
+    username: admin
+  # zipkin HTTP 收集
+#  zipkin: 
+#    baseUrl: http://127.0.0.1:9411
+#    sender:
+#      type: web
+  # Sleuth  
+  sleuth: 
+    sampler: 
+      probability: 1.0 # 采样率，默认为 0.1。1.0 为完全收集，收集比例越大，收集发送服务对服务器影响越大，同时对存储压力也很大。
+    
+# Eureka
+eureka:
+  client:
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 30
+    serviceUrl:
+      defaultZone: http://admin:123@localhost:8700/eureka
+#      defaultZone: http://admin:123@host1:8700/eureka/,http://admin:123@host2:8701/eureka/,http://admin:123@host3:8702/eureka/
+  instance:
+    metadataMap:
+      cluster: C1 # Turbine aggregator cluster name
+      
+# Feign
+feign:
+  # Hystrix
+  hystrix:
+    enabled: true
+  # Compression
+  compression:
+    request:
+      enabled: true
+      mimeTypes: text/xml,application/xml,application/json
+      minRequestSize: 2048
+    response:
+      enabled: true
+
+# Ribbon
+users-service: # <serviceApplicationName>
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.AvailabilityFilteringRule
+
+    
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream,health,info,refresh
+#        include: *
+
+# Error
+error:
+  path: /error

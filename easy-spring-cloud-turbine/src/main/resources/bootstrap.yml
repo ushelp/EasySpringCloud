@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: turbine
+  cloud:
+    config:
+      # Use Spring Cloud Config Server 
+      enabled: false 
+      # Config file
+      profile: dev
+#      profile: default
+      label: master
+      # Direct Config Server
+#      uri: http://admin:123@localhost:2000/
+      # Eureka Config Server
+      discovery:
+        enabled: true
+        serviceId: config-server # Config Server 'spring.application.name'
+      ## Config Server Security
+      password: 123
+      username: admin
+
+# Eureka Config Server
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123@localhost:8700/eureka
+#      defaultZone: http://admin:123@host1:8700/eureka/,http://admin:123@host2:8701/eureka/,http://admin:123@host3:8702/eureka/
+
+    

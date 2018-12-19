@@ -1,0 +1,19 @@
+server:
+  port: 6000
+  
+spring:
+  application:
+    name: stream-receiver
+  # Spring Cloud Bus: RabbitMQ
+  rabbitmq:
+    host: localhost
+    password: 123
+    port: 5672
+    username: admin
+  # group
+  ## spring.cloud.stream.bindings.[channelName].group = XXX
+  cloud:
+    stream:
+      bindings:
+        input: # channelName
+          group: groupA
