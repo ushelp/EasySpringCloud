@@ -6,11 +6,10 @@ spring:
       # Use Spring Cloud Config Server 
       enabled: false 
       # Config file
-      profile: dev
-#      profile: default
+      profile: default
       label: master
       # Direct Config Server
-#      uri: http://admin:123@localhost:2000/
+#      uri: http://admin:123@localhost:6000/
       # Eureka Config Server
       discovery:
         enabled: true

@@ -17,11 +17,11 @@
 
 - `users/upload` (`int id, MultipartFile file`)
 
-	http://localhost:8800/users/upload
+	http://localhost:8900/users/upload
 	
 - `users/download`
 
-	http://localhost:8800/users/download
+	http://localhost:8900/users/download
 	
 ## Hystrix
 

@@ -34,7 +34,7 @@ spring.cloud.config.enabled=true
 	#      profile: default
 	      label: master
 	      # Direct Config Server
-	#      uri: http://admin:123@localhost:2000/
+	#      uri: http://admin:123@localhost:6000/
 	      # Eureka Config Server
 	      discovery:
 	        enabled: true
@@ -51,20 +51,42 @@ spring.cloud.config.enabled=true
 	#      defaultZone: http://admin:123@host1:8700/eureka/,http://admin:123@host2:8701/eureka/,http://admin:123@host3:8702/eureka/
 	
 	```
-	
-	
-	> 对应 Config Server 的 `classpath:/config/users-provider/application-dev.properties`文件。 
+
+## 文件拉取测试
+
+```BASH
+curl http://admin:123@localhost:6000/users-provider/dev
+```
+
+对应 Config Server 的 `classpath:/config/users-provider/application-dev.properties`文件。 
+
 
 ## 配置刷新地址
 
 - 客户端配置刷新
- ```
- curl -X POST http://{client-host}:{client-port}/actuator/refresh
- ```
 
-- 基于 `Spring Cloud Bus` 的全局统一刷新（**需要安装配置 RabbitMQ**）
- ```
- curl -X POST http://admin:123@127.0.0.1:2000/actuator/bus-refresh
- ```
+	```
+	curl -X POST http://{client-host}:{client-port}/actuator/refresh
+	```
+
+- 基于 `Spring Cloud Bus` 的全局统一刷新（**需要安装配置 Kafka 或  RabbitMQ**）
+
+	```XML
+	<!-- Spring Cloud Bus: Kafka or RabbitMQ -->
+	<!-- Kafka -->
+	<dependency>
+	  <groupId>org.springframework.cloud</groupId>
+	  <artifactId>spring-cloud-starter-bus-kafka</artifactId>
+	</dependency>
+	<!-- RabbitMQ -->
+	<dependency>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+	</dependency>
+	```
+	
+	 ```
+	 curl -X POST http://admin:123@127.0.0.1:6000/actuator/bus-refresh
+	 ```
 
 # END

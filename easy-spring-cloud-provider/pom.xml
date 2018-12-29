@@ -44,11 +44,7 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.3</version>
 		</dependency>
-		<!-- RabbitMQ -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
-		</dependency>
+		
 		<!-- Sleuth with Zipkin over HTTP -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -63,18 +59,16 @@
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit</artifactId>
 		</dependency>
-		<!-- MySQL -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+		
+		<!-- Spring Cloud Bus: Kafka or RabbitMQ -->
+		<!-- <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-
-
-
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-bus-kafka</artifactId>
+		</dependency> -->
 
 		<!-- Actuator -->
 		<dependency>

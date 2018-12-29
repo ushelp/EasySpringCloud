@@ -1,9 +1,16 @@
 server:
-  port: 8900
+  port: 8901
 spring:
   application:
     name: users-consumer-resttemplate
-  # RabbitMQ(Spring Cloud Bus, Zipkin)
+  # Spring Cloud Bus, Zipkin（Kafka, RabbitMQ）
+  cloud:
+    stream:
+      # e.g., 'kafka', 'rabbit'
+      default-binder: kafka
+  kafka: 
+    bootstrap-servers:
+     - localhost:9092
   rabbitmq:
     host: localhost
     password: 123
@@ -14,6 +21,10 @@ spring:
 #    baseUrl: http://127.0.0.1:9411
 #    sender:
 #      type: web
+  # zipkin Kafka 收集
+#  zipkin:
+#    sender:
+#      type: kafka
   # Sleuth  
   sleuth: 
     sampler: 

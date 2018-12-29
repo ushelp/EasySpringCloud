@@ -4,12 +4,6 @@ server:
 spring:
   application:
     name: stream-receiver
-  # Spring Cloud Bus: RabbitMQ
-  rabbitmq:
-    host: localhost
-    password: 123
-    port: 5672
-    username: admin
   # group
   ## spring.cloud.stream.bindings.[channelName].group = XXX
   cloud:
@@ -17,3 +11,13 @@ spring:
       bindings:
         input: # channelName
           group: groupA
+      # e.g., 'kafka', 'rabbit'
+      default-binder: kafka
+  rabbitmq:
+    host: localhost
+    password: 123
+    port: 5672
+    username: admin
+  kafka: 
+    bootstrap-servers:
+     - localhost:9092

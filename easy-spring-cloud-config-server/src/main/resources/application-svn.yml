@@ -1,5 +1,5 @@
 server:
-  port: 2000
+  port: 6000
   
 spring:
   application:
@@ -16,18 +16,24 @@ spring:
           username: admin
           password: 123
           default-label: '' # default is "trunk"
+    stream:
+      # e.g., 'kafka', 'rabbit'
+      default-binder: kafka          
   # Security
   security:
     user:
       name: admin
       password: 123      
-  # Spring Cloud Bus: RabbitMQ
+  # Spring Cloud Bus
   rabbitmq:
     host: localhost
     password: 123
     port: 5672
     username: admin
-      
+  kafka: 
+    bootstrap-servers:
+     - localhost:9092
+           
 # Eureka
 eureka:
   client:

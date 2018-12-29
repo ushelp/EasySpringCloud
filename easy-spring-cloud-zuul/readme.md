@@ -18,4 +18,6 @@
 http://localhost:5000/{service-id}/xxx
 ```
 
+http://127.0.0.1:5000/users-consumer-feign/users/100000
+
 # END

@@ -25,9 +25,10 @@
 - Ribbon 客户端负载均衡
 - Zuul 服务网关
 - Stream 消息驱动服务
-	- RabbitMQ 
+	- Kafka, RabbitMQ
 - Sleuth 和 Zipkin 分布式服务追踪系统(Distributed Systems Tracing System)
 	- HTTP 收集器 + Mem 存储
+	- Kafka 收集器 + ElasticSearch 存储
 	- RabbitMQ 收集器 + ElasticSearch 存储
 
 ## 包含组件
@@ -105,6 +106,9 @@
 	基于 Sleuth 和 Zipkin 的分布式服务追踪技术(Distributed Systems Tracing System) 。
 	- 耗时分析，可视化错误，链路优化
 	- HTTP Collector + Mem Storage
+	- Kafka Collector  + Mem Storage
+	- RabbitMQ Collector  + Mem Storage
+	- Kafka Collector  + ElasticSearch Storage
 	- RabbitMQ Collector  + ElasticSearch Storage
 
 
@@ -116,17 +120,133 @@
 
 ## 基本启动步骤
 
-**Eureka** --> **Config** --> **RabbitMQ**（`可选`） --> **Provider** --> **Consumer** --> **Zuul** --> **Turbine**(`可选`) --> **Zipkin**(`可选`)
+**Eureka** --> **Config** --> **Kafka/RabbitMQ**（`可选`） --> **Provider** --> **Consumer** --> **Zuul** --> **Turbine**(`可选`) --> **Zipkin**(`可选`)
 
 
-#### RabbitMQ
+## Kafka/RabbitMQ
 
-- 可选 RabbitMQ 服务运行的项目
+- 可选  Kafka/RabbitMQ 服务运行的项目
 	- Spring Cloud Bus 配置中心全局刷新服务
-	- Zipkin RabbitMQ Collector 收集服务
+	- Zipkin Kafka/RabbitMQ Collector 收集服务
 
-- 必须 RabbitMQ 服务运行的项目
+- 必须  Kafka/RabbitMQ 服务运行的项目
 	- Spring Cloud Stream
+	
+
+- EasySpringCloud 配置 Kafka 或 RabbitMQ 信息
+
+    为了减少项目启动对第三方中间件的依赖，EasySpringCloud 所有项目**注释了 `Sleuth +Zipkin` 和 `Spring Cloud Bus` 运行配置**。如有需要，可按如下配置开启即可。
+	
+	
+	- Maven
+	
+		```XML
+		<!-- Spring Cloud Bus: Kafka or RabbitMQ -->
+		<!-- Kafka -->
+		<dependency>
+		  <groupId>org.springframework.cloud</groupId>
+		  <artifactId>spring-cloud-starter-bus-kafka</artifactId>
+		</dependency>
+		<!-- RabbitMQ -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
+		
+		<!-- Sleuth & Zipkin -->
+		<!-- Sleuth with Zipkin over HTTP -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+		<!-- Sleuth with Zipkin over RabbitMQ -->
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
+		</dependency>
+		```
+	
+	- `Zipkin Kafka Collector` + `Spring Cloud Bus`
+	
+		```YML
+		spring:
+		  cloud:
+		    stream:
+		      # e.g., 'kafka', 'rabbit'
+		      default-binder: kafka
+		  # Kafka (Zipkin & Spring Cloud Bus)
+		  kafka: 
+		    bootstrap-servers:
+		     - localhost:9092
+		  # zipkin Kafka 收集
+		  zipkin:
+		    sender:
+		      type: kafka
+		  # Sleuth  
+		  sleuth: 
+		    sampler: 
+		      probability: 1.0 
+		```
+
+	- `Zipkin RabbitMQ Collector` + `Spring Cloud Bus` 
+	
+		```YML
+		spring:
+		  cloud:
+		    stream:
+		      # e.g., 'kafka', 'rabbit'
+		      default-binder: rabbit
+		  # RabbitMQ (Zipkin & Spring Cloud Bus)
+		  rabbitmq:
+		    host: localhost
+		    password: 123
+		    port: 5672
+		    username: admin
+		  # Sleuth  
+		  sleuth: 
+		    sampler: 
+		      probability: 1.0 
+		```
+	
+	- `Zipkin HTTP Collector` + `Spring Cloud Bus(Kafka)`
+	
+		```YML
+		spring:
+		  cloud:
+		    stream:
+		      # e.g., 'kafka', 'rabbit'
+		      default-binder: kafka
+		  # Kafka (Spring Cloud Bus)
+		  kafka: 
+		    bootstrap-servers:
+		     - localhost:9092
+		  # zipkin HTTP 收集
+		  zipkin: 
+		    baseUrl: http://127.0.0.1:9411
+		    sender:
+		      type: web
+		  # Sleuth  
+		  sleuth: 
+		    sampler: 
+		      probability: 1.0 
+		```
+
+## 端口速查
+
+- Eureka Server：`8700`, `8701`, `8702`
+- Spring Cloud Config Server: `6000`
+- Service Provider：`8800`
+- Service Consumer Feign：`8900`
+- Service Consumer RestTemplate：`8901`
+- Zuul: `5000`
+- Turbine：`3000`
+- Zipkin: `9411`
+- Kafka: `9092`
+- RabbitMQ: `5672`
 		
 # End
 
