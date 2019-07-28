@@ -114,7 +114,7 @@
 
 ## 结构
 
-![easy-spring-cloud](docs/imgs/easy-spring-cloud.png)
+![easy-spring-cloud](docs/imgs/easy-spring-cloud-new.png)
 
 	
 
