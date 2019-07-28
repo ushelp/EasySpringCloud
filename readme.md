@@ -11,6 +11,11 @@
 |:---:|:---:|
 | Greenwich.SR2 | 2.1.6.RELEASE |
 
+
+## 结构
+
+![easy-spring-cloud](docs/imgs/easy-spring-cloud-new.png)
+
 ## 主要组件
 
 - Eureka 服务注册中心，服务注册发现
@@ -31,7 +36,7 @@
 	- Kafka 收集器 + ElasticSearch 存储
 	- RabbitMQ 收集器 + ElasticSearch 存储
 
-## 包含组件
+## 核心项目简介
 
 - `easy-spring-cloud-eureka-server`
 
@@ -111,12 +116,6 @@
 	- Kafka Collector  + ElasticSearch Storage
 	- RabbitMQ Collector  + ElasticSearch Storage
 
-
-## 结构
-
-![easy-spring-cloud](docs/imgs/easy-spring-cloud-new.png)
-
-	
 
 ## 基本启动步骤
 
