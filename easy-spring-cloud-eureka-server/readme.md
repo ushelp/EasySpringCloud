@@ -4,9 +4,18 @@
 
 ## Configuration
 
+- hosts(`Local clusetr test`)
+
+	```
+	127.0.0.1 host1
+	127.0.0.1 host2
+	127.0.0.1 host3
+	```
+
+
 - Standalone Mode
 
-	Port:`8700`
+	Port:`8701`
 
 - Cluster Mode
 
@@ -22,19 +31,19 @@
 - Cluster Mode
 
 	 ```Properties
-	 spring.profiles.active=localhost
+	 spring.profiles.active=host1
 	 ```
 	 	 
 	 or
 	 
 	 ```BASH
-	 mvn springboot:run -Dspring.profiles.active=localhost2
+	 mvn springboot:run -Dspring.profiles.active=host2
 	 ```
 	 
 	 or
 	 
 	 ```SHELL
-	 java -jar xxxx.jar --spring.profiles.active=localhost3
+	 java -jar xxxx.jar --spring.profiles.active=host3
 	 ```
 
 # END

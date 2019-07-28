@@ -9,7 +9,7 @@
 
 |Spring Cloud Version | Spring Boot Version|
 |:---:|:---:|
-| Finchley.SR2 | 2.0.7.RELEASE |
+| Greenwich.SR2 | 2.1.6.RELEASE |
 
 ## 主要组件
 
@@ -43,10 +43,10 @@
 
 	支持 Git, SVN, Native 模式的高可用 Config Server(分布式配置管理中心)。
 	
-	- Easy Spring Cloud 项目均已实现和集成了`Native` 模式，但默认未启用 Config Server。在 Config Client 项目的 `bootstrap.yml` 中可直接开启或关闭配置中心服务
+	- Easy Spring Cloud 项目均已实现和集成了`Native` 模式，**所有配置文件均在 `src/main/resources/config/{application.name}` 目录中**。在 Config Client 项目的 `bootstrap.yml` 中可直接关闭配置中心服务
 
 		```properties
-		spring.cloud.config.enabled=true
+		spring.cloud.config.enabled=false
 		```
 
 - `easy-spring-cloud-eureka-provider`
@@ -123,19 +123,28 @@
 **Eureka** --> **Config** --> **Kafka/RabbitMQ**（`可选`） --> **Provider** --> **Consumer** --> **Zuul** --> **Turbine**(`可选`) --> **Zipkin**(`可选`)
 
 
+- hosts(`Local clusetr test`)
+
+	```
+	127.0.0.1 host1
+	127.0.0.1 host2
+	127.0.0.1 host3
+	```
+
 ## Kafka/RabbitMQ
 
-- 可选  Kafka/RabbitMQ 服务运行的项目
-	- Spring Cloud Bus 配置中心全局刷新服务
-	- Zipkin Kafka/RabbitMQ Collector 收集服务
-
-- 必须  Kafka/RabbitMQ 服务运行的项目
+- 必须使用 Kafka/RabbitMQ 运行的项目
 	- Spring Cloud Stream
+
+- 依赖 Kafka/RabbitMQ 的可选服务
+	- Spring Cloud Bus 配置中心全局刷新服务
+	- Zipkin Kafka/RabbitMQ Collector 收集服务	
 	
+- 在 EasySpringCloud 配置 Kafka 或 RabbitMQ 信息
 
-- EasySpringCloud 配置 Kafka 或 RabbitMQ 信息
-
-    为了减少项目启动对第三方中间件的依赖，EasySpringCloud 所有项目**注释了 `Sleuth +Zipkin` 和 `Spring Cloud Bus` 运行配置**。如有需要，可按如下配置开启即可。
+    为了减少项目启动对第三方中间件的依赖，EasySpringCloud 所有项目**禁用了 MQ 相关 Maven 依赖**。Zipkin 默认使用 HTTP Collector。
+	
+	`Spring Cloud Bus` 和 `Zipkin Collector` 配置开启 MQ 支持（建议使用 kafka）：
 	
 	
 	- Maven
@@ -169,6 +178,29 @@
 			<artifactId>spring-rabbit</artifactId>
 		</dependency>
 		```
+
+	- `Zipkin HTTP Collector` + `Spring Cloud Bus(Kafka)`
+	
+		```YML
+		spring:
+		  cloud:
+		    stream:
+		      # e.g., 'kafka', 'rabbit'
+		      default-binder: kafka
+		  # Kafka (Spring Cloud Bus)
+		  kafka: 
+		    bootstrap-servers:
+		     - localhost:9092
+		  # zipkin HTTP Collector
+		  zipkin: 
+		    baseUrl: http://127.0.0.1:9411
+		    sender:
+		      type: web
+		  # Sleuth  
+		  sleuth: 
+		    sampler: 
+		      probability: 1.0 
+		```
 	
 	- `Zipkin Kafka Collector` + `Spring Cloud Bus`
 	
@@ -178,11 +210,11 @@
 		    stream:
 		      # e.g., 'kafka', 'rabbit'
 		      default-binder: kafka
-		  # Kafka (Zipkin & Spring Cloud Bus)
+		  # Kafka (Zipkin Kafka Colloector & Spring Cloud Bus)
 		  kafka: 
 		    bootstrap-servers:
 		     - localhost:9092
-		  # zipkin Kafka 收集
+		  # zipkin Kafka Collector
 		  zipkin:
 		    sender:
 		      type: kafka
@@ -200,7 +232,7 @@
 		    stream:
 		      # e.g., 'kafka', 'rabbit'
 		      default-binder: rabbit
-		  # RabbitMQ (Zipkin & Spring Cloud Bus)
+		  # RabbitMQ (Zipkin RabbitMQ Collector & Spring Cloud Bus)
 		  rabbitmq:
 		    host: localhost
 		    password: 123
@@ -212,36 +244,25 @@
 		      probability: 1.0 
 		```
 	
-	- `Zipkin HTTP Collector` + `Spring Cloud Bus(Kafka)`
-	
-		```YML
-		spring:
-		  cloud:
-		    stream:
-		      # e.g., 'kafka', 'rabbit'
-		      default-binder: kafka
-		  # Kafka (Spring Cloud Bus)
-		  kafka: 
-		    bootstrap-servers:
-		     - localhost:9092
-		  # zipkin HTTP 收集
-		  zipkin: 
-		    baseUrl: http://127.0.0.1:9411
-		    sender:
-		      type: web
-		  # Sleuth  
-		  sleuth: 
-		    sampler: 
-		      probability: 1.0 
-		```
+
+		
+## 认证信息
+
+```
+spring:
+  security:
+    user:
+      name: admin
+      password: 123
+```
 
 ## 端口速查
 
-- Eureka Server：`8700`, `8701`, `8702`
-- Spring Cloud Config Server: `6000`
-- Service Provider：`8800`
-- Service Consumer Feign：`8900`
-- Service Consumer RestTemplate：`8901`
+- Eureka Server：`8701`, `8702`, `8703`
+- Spring Cloud Config Server: `6001`
+- Service Provider：`8801`
+- Service Consumer Feign：`8901`
+- Service Consumer RestTemplate：`8902`
 - Zuul: `5000`
 - Turbine：`3000`
 - Zipkin: `9411`

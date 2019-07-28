@@ -1,5 +1,3 @@
-server:
-  port: 5000
   
 spring:
   application:
@@ -18,10 +16,10 @@ spring:
     port: 5672
     username: admin
   # zipkin HTTP 收集
-#  zipkin: 
-#    baseUrl: http://127.0.0.1:9411
-#    sender:
-#      type: web
+  zipkin: 
+    baseUrl: http://127.0.0.1:9411
+    sender:
+      type: web
   # zipkin Kafka 收集
 #  zipkin:
 #    sender:
@@ -35,8 +33,8 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://admin:123@localhost:8700/eureka
-#      defaultZone: http://admin:123@host1:8700/eureka/,http://admin:123@host2:8701/eureka/,http://admin:123@host3:8702/eureka/
+      defaultZone: http://admin:123@localhost:8701/eureka
+#      defaultZone: http://admin:123@host1:8701/eureka/,http://admin:123@host2:8702/eureka/,http://admin:123@host3:8703/eureka/
 
 
 # Ribbon

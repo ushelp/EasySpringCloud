@@ -34,7 +34,7 @@ spring.cloud.config.enabled=true
 	#      profile: default
 	      label: master
 	      # Direct Config Server
-	#      uri: http://admin:123@localhost:6000/
+	#      uri: http://admin:123@localhost:6001/
 	      # Eureka Config Server
 	      discovery:
 	        enabled: true
@@ -47,15 +47,15 @@ spring.cloud.config.enabled=true
 	eureka:
 	  client:
 	    serviceUrl:
-	      defaultZone: http://admin:123@localhost:8700/eureka
-	#      defaultZone: http://admin:123@host1:8700/eureka/,http://admin:123@host2:8701/eureka/,http://admin:123@host3:8702/eureka/
+	      defaultZone: http://admin:123@localhost:8701/eureka
+	#      defaultZone: http://admin:123@host1:8701/eureka/,http://admin:123@host2:8702/eureka/,http://admin:123@host3:8703/eureka/
 	
 	```
 
 ## 文件拉取测试
 
 ```BASH
-curl http://admin:123@localhost:6000/users-provider/dev
+curl http://admin:123@localhost:6001/users-provider/dev
 ```
 
 对应 Config Server 的 `classpath:/config/users-provider/application-dev.properties`文件。 
@@ -86,7 +86,7 @@ curl http://admin:123@localhost:6000/users-provider/dev
 	```
 	
 	 ```
-	 curl -X POST http://admin:123@127.0.0.1:6000/actuator/bus-refresh
+	 curl -X POST http://admin:123@127.0.0.1:6001/actuator/bus-refresh
 	 ```
 
 # END

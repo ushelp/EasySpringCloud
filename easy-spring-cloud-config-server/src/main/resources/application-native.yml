@@ -1,5 +1,5 @@
 server:
-  port: 6000
+  port: 6001
   
 spring:
   application:
@@ -35,8 +35,8 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://admin:123@localhost:8700/eureka
-#      defaultZone: http://admin:123@host1:8700/eureka/,http://admin:123@host2:8701/eureka/,http://admin:123@host3:8702/eureka/
+      defaultZone: http://admin:123@localhost:8701/eureka
+#      defaultZone: http://admin:123@host1:8701/eureka/,http://admin:123@host2:8702/eureka/,http://admin:123@host3:8703/eureka/
         
 # Actuator
 management:

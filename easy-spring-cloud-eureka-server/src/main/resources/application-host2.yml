@@ -1,5 +1,5 @@
 server:
-  port: 8701
+  port: 8702
   
 spring:
   application:
@@ -15,19 +15,19 @@ eureka:
   instance:
     hostname: localhost
   # Standalone Mode
-  client:
-    fetchRegistry: false
-    registerWithEureka: false
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+#  client:
+#    fetchRegistry: false
+#    registerWithEureka: false
+#    serviceUrl:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   #  Cluster Mode
-#  client: 
-#    serviceUrl: 
-#      defaultZone: http://admin:123@localhost:8700/eureka/,http://admin:123@localhost:8701/eureka/
+  client: 
+    serviceUrl: 
+      defaultZone: http://admin:123@localhost:8701/eureka/,http://admin:123@host3:8703/eureka/
   datacenter: cloud
   environment: prod
   # USED ONLY IN DEVELOPMENT MODE
-  # DevMode: Remove invalidate
+  # DevMode: Remove invalidate Eureka server
 #  server: 
 #    enableSelfPreservation: false
 #    evictionIntervalTimerInMs: 4000

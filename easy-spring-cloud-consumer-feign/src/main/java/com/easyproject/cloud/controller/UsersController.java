@@ -53,11 +53,11 @@ public class UsersController {
 	public Map<String, Object> upload(int id, MultipartFile file) {
 		logger.info("[Consumer] UsersController.upload");
 		Map<String, Object> result = new HashMap<String, Object>();
-		usersClient.upload(id, file);
+		String res=usersClient.upload(id, file);
 
 		result.put("code", 0);
 		result.put("msg", "ok");
-		result.put("data", "");
+		result.put("data", res);
 		return result;
 	}
 

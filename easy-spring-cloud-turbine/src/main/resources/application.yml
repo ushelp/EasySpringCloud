@@ -1,47 +1,6 @@
+spring:
+  profiles:
+    active: default
+
 server:
   port: 3000
-  
-spring:
-  application:
-    name: turbine
-  # Spring Cloud Bus, Zipkin（Kafka, RabbitMQ）
-  cloud:
-    stream:
-      # e.g., 'kafka', 'rabbit'
-      default-binder: kafka
-  kafka: 
-    bootstrap-servers:
-     - localhost:9092
-  rabbitmq:
-    host: localhost
-    password: 123
-    port: 5672
-    username: admin
-
-# Eureka
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://admin:123@localhost:8700/eureka
-#      defaultZone: http://admin:123@host1:8700/eureka/,http://admin:123@host2:8701/eureka/,http://admin:123@host3:8702/eureka/
-  
-
-# Turbine
-turbine:
-  # Eureka service ids
-  appConfig: users-consumer-feign,users-consumer-resttemplate
-  # Turbine aggregator
-  aggregator:
-    clusterConfig: C1, C2
-  clusterNameExpression: metadata['cluster']
-#  aggregator: 
-#    clusterConfig: default
-#  clusterNameExpression: 'default'
-  
-# Actuator        
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh
-#        include: *
