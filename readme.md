@@ -4,7 +4,7 @@
 
 提供 Spring Cloud 生态下最新(`GA 版本`)并经测试的开发基础框架，集成了 Spring Cloud 常用组件 ，让您无需在框架构建，调试方面花费精力，快速启动您的云开发业务。
 
-A fast cloud development base environment based on Spring Cloud. Provides the latest (`GA version`) and tested development infrastructure under the Spring Cloud ecosystem, integrating Spring Cloud common components, allowing you to quickly start your cloud development business without having to worry about building and debugging the framework.
+A fast cloud development infrastructure based on Spring Cloud. Provides the latest (`GA version`) and tested development infrastructure under the Spring Cloud ecosystem, integrating Spring Cloud common components, allowing you to quickly start your cloud development business without having to worry about building and debugging the framework.
 
 ## Latest version
 
