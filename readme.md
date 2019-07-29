@@ -4,19 +4,20 @@
 
 提供 Spring Cloud 生态下最新(`GA 版本`)并经测试的开发基础框架，集成了 Spring Cloud 常用组件 ，让您无需在框架构建，调试方面花费精力，快速启动您的云开发业务。
 
+A fast cloud development base environment based on Spring Cloud. Provides the latest (`GA version`) and tested development infrastructure under the Spring Cloud ecosystem, integrating Spring Cloud common components, allowing you to quickly start your cloud development business without having to worry about building and debugging the framework.
 
-## 当前最新版本
+## Latest version
 
 |Spring Cloud Version | Spring Boot Version|
 |:---:|:---:|
 | Greenwich.SR2 | 2.1.6.RELEASE |
 
 
-## 结构
+## Spring Cloud Core Architecture Overview
 
 ![easy-spring-cloud](docs/imgs/easy-spring-cloud-new.png)
 
-## 主要组件
+## Core Component
 
 - Eureka 服务注册中心，服务注册发现
 - Spring Cloud Config 分布式配置管理
@@ -36,7 +37,7 @@
 	- Kafka 收集器 + ElasticSearch 存储
 	- RabbitMQ 收集器 + ElasticSearch 存储
 
-## 核心项目简介
+## Project Description
 
 - `easy-spring-cloud-eureka-server`
 
@@ -245,7 +246,7 @@
 	
 
 		
-## 认证信息
+## Login
 
 ```
 spring:
@@ -255,7 +256,7 @@ spring:
       password: 123
 ```
 
-## 端口速查
+## Port list
 
 - Eureka Server：`8701`, `8702`, `8703`
 - Spring Cloud Config Server: `6001`
