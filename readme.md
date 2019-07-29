@@ -118,9 +118,9 @@ A fast cloud development infrastructure based on Spring Cloud. Provides the late
 	- RabbitMQ Collector  + ElasticSearch Storage
 
 
-## 基本启动步骤
+## Basic startup steps
 
-**Eureka** --> **Config** --> **Kafka/RabbitMQ**（`可选`） --> **Provider** --> **Consumer** --> **Zuul** --> **Turbine**(`可选`) --> **Zipkin**(`可选`)
+**Eureka** --> **Config** --> **Kafka/RabbitMQ**（`Optional`） --> **Provider** --> **Consumer** --> **Zuul** --> **Turbine**(`Optional`) --> **Zipkin**(`Optional`)
 
 
 - hosts(`Local clusetr test`)
